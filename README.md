@@ -1,7 +1,12 @@
-# verilog-projects
-This repository contains my Verilog RTL design and verification practice.
+# Verilog Projects
 
-## Completed Labs
+Welcome to my Verilog HDL learning repository.
+
+## About
+
+This repository contains my Verilog RTL design and verification projects completed while learning Digital Design and VLSI.
+
+## Completed Projects
 
 - Half Adder
 - Full Adder
@@ -17,8 +22,17 @@ This repository contains my Verilog RTL design and verification practice.
 - Verilog HDL
 - EDA Playground
 - GTKWave
+- Git & GitHub
+
+## Learning Goals
+
+- RTL Design
+- Design Verification
+- Digital Logic Design
+- VLSI Frontend
 
 ## Author
 
-Ravi Kumar
-B.Tech - Electronics and Communication Engineering
+**Ravi Kumar**
+
+B.Tech – Electronics and Communication Engineering
