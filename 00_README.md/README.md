@@ -16,6 +16,7 @@ This repository contains my Verilog RTL design and verification projects complet
 - D Flip-Flop with Asynchronous Reset
 - 4-bit Register
 - 4-bit Register with Asynchronous Reset
+- 4-bit shift register
 
 ## Tools Used
 
