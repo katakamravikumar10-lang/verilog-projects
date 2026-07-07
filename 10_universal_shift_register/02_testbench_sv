@@ -1,0 +1,58 @@
+module tb;
+  reg clk;
+  reg serial_input_right;
+  reg serial_input_left;
+  reg [3:0] parallel_input;
+  reg [1:0] sel;
+  wire [3:0] q;
+  
+  universal_shift_register uut(
+    
+    .clk(clk),
+    .serial_input_right(serial_input_right),
+    .serial_input_left(serial_input_left),
+    .parallel_input(parallel_input),
+    .sel(sel),
+    .q(q)
+    
+  );
+  
+   initial begin
+     
+     clk = 0;
+     
+   end
+  
+  
+  initial begin
+    
+    $dumpfile("universal_shift_register.vcd");
+    $dumpvars(0,tb);
+    $monitor("Time=%0t, clk=%b, serial_input_right=%b, serial_input_left=%b, parallel_input=%b, sel=%b, q=%b",
+             $time, clk, serial_input_right, serial_input_left, parallel_input, sel, q);
+    
+  end
+  
+  always #5 clk = ~clk;
+  
+  initial begin 
+    
+    sel = 2'b00;
+    #10;
+    
+    serial_input_right = 1;
+    sel = 2'b01;
+    #10;
+    
+    serial_input_left = 0;
+    sel = 2'b10;
+    #10;
+    
+    parallel_input = 4'b1010;
+    sel = 2'b11;
+    #10;
+    
+    $finish;
+  end
+  
+endmodule
