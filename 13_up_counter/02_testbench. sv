@@ -1,0 +1,37 @@
+module tb;
+  reg clk;
+  reg reset;
+  wire [3:0] q;
+  
+  up_counter uut(
+    
+    .clk(clk),
+    .reset(reset),
+    .q(q)
+    
+  );
+  
+  always #5 clk = ~clk;
+  
+  initial begin
+    
+    $dumpfile("up_counter.vcd");
+    $dumpvars(0,tb);
+    $monitor("time=%0t, clk=%b, reset=%b, q=%b",
+              $time, clk, reset, q);
+  end
+  
+  initial begin
+    
+    reset = 1;
+    clk = 0;
+    #10;
+    
+  
+   reset = 0;
+ #170;
+    
+    $finish;
+    
+  end
+endmodule
