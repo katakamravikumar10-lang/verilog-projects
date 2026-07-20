@@ -1,0 +1,197 @@
+# 4-bit Up/Down Counter using Verilog
+
+## 📌 Overview
+
+This project implements a **4-bit Up/Down Counter** in Verilog HDL. The counter can count either **up** or **down** depending on the value of the control input (`up_down`). It also includes an **active-high asynchronous reset** to initialize the counter to `0000`.
+
+This project demonstrates sequential logic, conditional statements inside clocked always blocks, and the use of control signals to change circuit behavior.
+
+---
+
+## ✨ Features
+
+- 4-bit synchronous Up/Down Counter
+- Positive edge-triggered operation
+- Active-high asynchronous reset
+- Counts Up when `up_down = 1`
+- Counts Down when `up_down = 0`
+- Wrap-around counting
+- Synthesizable Verilog HDL
+
+---
+
+## 📂 Project Structure
+
+```
+up_down_counter/
+│── design/
+│   └── up_down_counter.v
+│
+│── testbench/
+│   └── tb_up_down_counter.v
+│
+│── waveform/
+│   └── up_down_counter.vcd
+│
+└── README.md
+```
+
+---
+
+## 🛠 Module Description
+
+### Inputs
+
+| Signal | Width | Description |
+|---------|------|-------------|
+| clk | 1 | System clock |
+| reset | 1 | Active-high asynchronous reset |
+| up_down | 1 | Counter direction control |
+
+### Output
+
+| Signal | Width | Description |
+|---------|------|-------------|
+| q | 4 | 4-bit counter output |
+
+---
+
+## ⚙ Operation
+
+### Reset
+
+When `reset = 1`
+
+```
+q = 0000
+```
+
+---
+
+### Count Up
+
+When
+
+```
+up_down = 1
+```
+
+Counter sequence:
+
+```
+0000
+0001
+0010
+0011
+0100
+...
+1111
+0000
+```
+
+---
+
+### Count Down
+
+When
+
+```
+up_down = 0
+```
+
+Counter sequence:
+
+```
+1111
+1110
+1101
+1100
+1011
+...
+0001
+0000
+1111
+```
+
+---
+
+## 🏗 Hardware Architecture
+
+```
+                 +----------------------+
+                 |     4-bit Register   |
+                 +----------+-----------+
+                            |
+                            |
+                            v
+                   +------------------+
+                   | +1       -1      |
+                   |                  |
+                   +--------+---------+
+                            ^
+                            |
+                      up_down Control
+```
+
+The control signal selects whether the counter increments or decrements on every positive clock edge.
+
+---
+
+## 🧪 Testbench
+
+The testbench verifies:
+
+- Clock generation
+- Asynchronous reset
+- Up counting
+- Down counting
+- Direction change during simulation
+- Waveform generation using VCD
+
+---
+
+## 💻 Simulation Tools
+
+- EDA Playground
+- Icarus Verilog
+- GTKWave
+
+---
+
+## 📖 Concepts Learned
+
+- Verilog HDL
+- Sequential Logic
+- Positive Edge Triggering
+- Asynchronous Reset
+- Non-blocking Assignment (`<=`)
+- Conditional Statements
+- Up Counter
+- Down Counter
+- Control Signals
+- RTL Design
+- Testbench Writing
+- Waveform Analysis
+
+---
+
+## 🚀 Applications
+
+- Digital Counters
+- Frequency Division
+- Digital Clocks
+- Event Counters
+- Timers
+- Embedded Systems
+- FPGA Designs
+- ASIC Designs
+
+---
+
+## 👨‍💻 Author
+
+**Ravi Kumar**
+
+B.Tech – Electronics and Communication Engineering (ECE)
+
+Learning RTL Design and Verilog HDL
