@@ -1,0 +1,54 @@
+module tb;
+  
+  reg clk;
+  reg reset;
+  reg sin;
+  
+  wire [3:0] q;
+  wire sout;
+  
+  siso_shift_register uut(
+    
+    .clk(clk),
+    .reset(reset),
+    .sin(sin),
+    .sout(sout),
+    .q(q)
+    
+  );
+  
+  always #5 clk = ~clk;
+  
+  initial begin 
+    
+    $dumpfile("siso_shift_register.vcd");
+    $dumpvars(0, tb);
+    $monitor("time=%0t, clk=%b, reset=%b, sin=%b, q=%b, sout=%b",
+             $time, clk, reset, sin, q, sout);
+    
+  end
+  
+  initial begin
+    
+    reset = 1;
+    clk = 0;
+    sin = 0;
+    #10;
+    
+    reset = 0;
+    sin = 1;
+    #10;
+    
+    sin = 0;
+    #10;
+    
+    sin = 1;
+    #10;
+    
+    sin = 1;
+    #10;
+    
+    $finish;
+    
+  end
+endmodule
