@@ -1,0 +1,51 @@
+module tb;
+
+reg clk;
+reg reset;
+reg [3:0] din;
+
+wire [3:0] q;
+
+pipo_shift_register uut(
+    .clk(clk),
+    .reset(reset),
+    .din(din),
+    .q(q)
+);
+
+always #5 clk = ~clk;
+
+initial begin
+
+    $dumpfile("pipo_shift_register.vcd");
+    $dumpvars(0, tb);
+
+    $monitor("time=%0t, clk=%b, reset=%b, din=%b, q=%b",
+             $time, clk, reset, din, q);
+
+end
+
+initial begin
+
+    clk = 0;
+    reset = 1;
+    din = 4'b0000;
+
+    #10;
+
+    reset = 0;
+
+    din = 4'b1011;
+    #10;
+
+    din = 4'b0101;
+    #10;
+
+    din = 4'b1100;
+    #10;
+
+    $finish;
+
+end
+
+endmodule
