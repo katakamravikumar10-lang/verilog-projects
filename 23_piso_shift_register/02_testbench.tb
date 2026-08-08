@@ -1,0 +1,52 @@
+module tb;
+
+reg clk;
+reg reset;
+reg load;
+reg [3:0] din;
+
+wire [3:0] q;
+wire sout;
+
+piso_shift_register uut(
+    .clk(clk),
+    .reset(reset),
+    .load(load),
+    .din(din),
+    .q(q),
+    .sout(sout)
+);
+
+always #5 clk = ~clk;
+
+initial begin
+
+    $dumpfile("piso_shift_register.vcd");
+    $dumpvars(0, tb);
+
+    $monitor("time=%0t, clk=%b, reset=%b, load=%b, din=%b, q=%b, sout=%b",
+             $time, clk, reset, load, din, q, sout);
+
+end
+
+initial begin
+
+    clk = 0;
+    reset = 1;
+    load = 0;
+    din = 4'b1011;
+
+    #10;
+
+    reset = 0;       
+    load = 1;        
+
+    #10;
+
+    load = 0;        
+
+    #40;
+
+    $finish;
+
+end
