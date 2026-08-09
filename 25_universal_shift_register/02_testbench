@@ -1,0 +1,78 @@
+module tb;
+
+reg clk;
+reg reset;
+reg s0;
+reg s1;
+reg sr;
+reg sl;
+reg [3:0] din;
+
+wire [3:0] q;
+
+universal_shift_register dut(
+    .clk(clk),
+    .reset(reset),
+    .s0(s0),
+    .s1(s1),
+    .sr(sr),
+    .sl(sl),
+    .din(din),
+    .q(q)
+);
+
+always #5 clk = ~clk;
+
+initial begin
+
+    $dumpfile("universal_shift_register.vcd");
+    $dumpvars(0, tb);
+
+    $monitor("time=%0t, clk=%b, reset=%b, s1=%b, s0=%b, sr=%b, sl=%b, din=%b, q=%b",
+             $time, clk, reset, s1, s0, sr, sl, din, q);
+
+end
+
+initial begin
+
+    clk = 0;
+    reset = 1;
+
+    s1 = 0;
+    s0 = 0;
+    sr = 0;
+    sl = 0;
+    din = 4'b0000;
+
+    #10;
+
+    reset = 0;
+
+    // 1. Parallel Load
+    din = 4'b1011;
+    s1 = 1;
+    s0 = 1;
+    #10;
+
+    // 2. Hold
+    s1 = 0;
+    s0 = 0;
+    #10;
+
+    // 3. Shift Right
+    sr = 0;
+    s1 = 0;
+    s0 = 1;
+    #10;
+
+    // 4. Shift Left
+    sl = 1;
+    s1 = 1;
+    s0 = 0;
+    #10;
+
+    $finish;
+
+end
+
+endmodule
