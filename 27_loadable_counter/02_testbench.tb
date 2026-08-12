@@ -1,0 +1,55 @@
+module tb;
+
+reg clk;
+reg reset;
+reg [3:0] din;
+reg load;
+
+wire [3:0] q;
+
+loadable_counter dut(
+    .clk(clk),
+    .reset(reset),
+    .din(din),
+    .load(load),
+    .q(q)
+);
+
+always #10 clk = ~clk;
+
+initial begin
+
+    $dumpfile("loadable_counter.vcd");
+    $dumpvars(0, tb);
+
+    $monitor("time=%0t, clk=%b, reset=%b, load=%b, din=%b, q=%b",
+             $time, clk, reset, load, din, q);
+
+end
+
+initial begin
+
+    clk = 0;
+    reset = 1;
+    load = 0;
+    din = 4'b0000;
+
+    #20;
+
+    // Load 1011
+    reset = 0;
+    din = 4'b1011;
+    load = 1;
+
+    #20;
+
+    // Start counting
+    load = 0;
+
+    #100;
+
+    $finish;
+
+end
+
+endmodule
