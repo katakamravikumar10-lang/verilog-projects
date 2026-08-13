@@ -1,0 +1,26 @@
+module tb;
+  reg clk;
+  reg reset;
+  wire clk_div2;
+  clock_divider dut(
+    .clk(clk),
+    .reset(reset),
+    .clk_div2(clk_div2)
+  );
+  always #10 clk = ~clk;
+  initial begin
+    $dumpfile("clock_divider.vcd");
+    $dumpvars(0,tb);
+    $monitor("time=%0t, clk=%b, reset=%b, clk_div2=%b",
+             $time,clk,reset,clk_div2);
+  end
+  initial begin
+    reset = 1;
+    clk= 0;
+    #10;
+    
+    reset = 0;
+    #90
+    $finish;
+  end
+endmodule
