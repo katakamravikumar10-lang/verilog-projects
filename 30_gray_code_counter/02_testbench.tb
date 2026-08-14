@@ -1,0 +1,41 @@
+module tb;
+
+reg clk;
+reg reset;
+
+wire [2:0] gray;
+
+gray_code_counter dut(
+    .clk(clk),
+    .reset(reset),
+    .gray(gray)
+);
+
+always #10 clk = ~clk;
+
+initial begin
+
+    $dumpfile("gray_code_counter.vcd");
+    $dumpvars(0, tb);
+
+    $monitor("time=%0t, clk=%b, reset=%b, gray=%b",
+             $time, clk, reset, gray);
+
+end
+
+initial begin
+
+    clk = 0;
+    reset = 1;
+
+    #10;
+
+    reset = 0;
+
+    #170;
+
+    $finish;
+
+end
+
+endmodule
